@@ -3,6 +3,35 @@ package resource.domain;
 public class Cliente {
 
     private String nome;
+
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        if (!super.equals(object)) return false;
+
+        Cliente cliente = (Cliente) object;
+
+        if (!java.util.Objects.equals(nome, cliente.nome)) return false;
+        if (!java.util.Objects.equals(cpf, cliente.cpf)) return false;
+        if (!java.util.Objects.equals(tel, cliente.tel)) return false;
+        if (!java.util.Objects.equals(endereco, cliente.endereco)) return false;
+        if (!java.util.Objects.equals(numCasa, cliente.numCasa)) return false;
+        if (!java.util.Objects.equals(cidade, cliente.cidade)) return false;
+        return java.util.Objects.equals(estado, cliente.estado);
+    }
+
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (nome != null ? nome.hashCode() : 0);
+        result = 31 * result + (cpf != null ? cpf.hashCode() : 0);
+        result = 31 * result + (tel != null ? tel.hashCode() : 0);
+        result = 31 * result + (endereco != null ? endereco.hashCode() : 0);
+        result = 31 * result + (numCasa != null ? numCasa.hashCode() : 0);
+        result = 31 * result + (cidade != null ? cidade.hashCode() : 0);
+        result = 31 * result + (estado != null ? estado.hashCode() : 0);
+        return result;
+    }
+
     private Long cpf;
     private Long tel;
     private String endereco;
