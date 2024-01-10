@@ -3,35 +3,6 @@ package resource.domain;
 public class Cliente {
 
     private String nome;
-
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        if (!super.equals(object)) return false;
-
-        Cliente cliente = (Cliente) object;
-
-        if (!java.util.Objects.equals(nome, cliente.nome)) return false;
-        if (!java.util.Objects.equals(cpf, cliente.cpf)) return false;
-        if (!java.util.Objects.equals(tel, cliente.tel)) return false;
-        if (!java.util.Objects.equals(endereco, cliente.endereco)) return false;
-        if (!java.util.Objects.equals(numCasa, cliente.numCasa)) return false;
-        if (!java.util.Objects.equals(cidade, cliente.cidade)) return false;
-        return java.util.Objects.equals(estado, cliente.estado);
-    }
-
-    public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + (nome != null ? nome.hashCode() : 0);
-        result = 31 * result + (cpf != null ? cpf.hashCode() : 0);
-        result = 31 * result + (tel != null ? tel.hashCode() : 0);
-        result = 31 * result + (endereco != null ? endereco.hashCode() : 0);
-        result = 31 * result + (numCasa != null ? numCasa.hashCode() : 0);
-        result = 31 * result + (cidade != null ? cidade.hashCode() : 0);
-        result = 31 * result + (estado != null ? estado.hashCode() : 0);
-        return result;
-    }
-
     private Long cpf;
     private Long tel;
     private String endereco;
@@ -39,6 +10,50 @@ public class Cliente {
     private String cidade;
     private String estado;
     
+    public Cliente(String nome, Long cpf, Long tel, String endereco, Integer numCasa, String cidade, String estado) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.tel = tel;
+        this.endereco = endereco;
+        this.numCasa = numCasa;
+        this.cidade = cidade;
+        this.estado = estado;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
+        return result;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+
+        if (obj == null)
+            return false;
+
+        if (getClass() != obj.getClass())
+            return false;
+
+        Cliente other = (Cliente) obj;
+        if (cpf == null) {
+            if (other.cpf != null)
+                return false;
+
+        } else if (!cpf.equals(other.cpf))
+            return false;
+            
+        return true;
+    }
+    @Override
+    public String toString() {
+        return "Cliente [nome=" + nome + ", CPF=" + cpf + "]";
+    }
+
     public String getNome() {
         return nome;
     }
