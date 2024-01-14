@@ -2,7 +2,6 @@ package resource;
 
 import javax.swing.JOptionPane;
 
-import resource.dao.ClienteMapDAO;
 import resource.dao.ClienteSetDAO;
 import resource.dao.IClienteDAO;
 import resource.domain.Cliente;
@@ -16,7 +15,7 @@ public class App {
         iClienteDAO = new ClienteSetDAO();
 
         String opcao = JOptionPane.showInputDialog(null,
-                "Digite 1 para cadastro, 2 para consultar, 3 para exclusão, 4 para alteração ou 5 para sair",
+                "Digite: \n1) Cadastro\n2) Consultar\n3) Excluir\n4) Alterar\n5) Sair",
                 "Green dinner", JOptionPane.INFORMATION_MESSAGE);
 
         while (!isOpcaoValida(opcao)) {
@@ -24,7 +23,7 @@ public class App {
                 sair();
             }
             opcao = JOptionPane.showInputDialog(null,
-                    "Opção inválida digite 1 para cadastro, 2 para consulta, 3 para cadastro, 4 para alteração ou 5 para sair",
+                    "Opção inválida!\nDigite: \n1) Cadastro\n2) Consultar\n3) Excluir\n4) Alterar\n5) Sair",
                     "Green dinner", JOptionPane.INFORMATION_MESSAGE);
         }
 
@@ -55,7 +54,7 @@ public class App {
             }
 
             opcao = JOptionPane.showInputDialog(null,
-                    "Digite 1 para cadastro, 2 para consulta, 3 para cadastro, 4 para alteração ou 5 para sair",
+                    "Digite: \n1) Cadastro\n2) Consultar\n3) Excluir\n4) Alterar\n5) Sair",
                     "Green dinner", JOptionPane.INFORMATION_MESSAGE);
 
         }
@@ -68,9 +67,10 @@ public class App {
             JOptionPane.showMessageDialog(null, "Dados incompletos", "Erro", JOptionPane.ERROR_MESSAGE);
             return;
         } else {
-            
-            Cliente cliente = new Cliente(dadosSeparados[0], dadosSeparados[1], dadosSeparados[2], dadosSeparados[3],
-                    dadosSeparados[4], dadosSeparados[5], dadosSeparados[6]);
+            Long cpf = Long.parseLong(dadosSeparados[1].trim());
+            Long tel = Long.parseLong(dadosSeparados[2].trim());
+            Integer numCasa = Integer.parseInt(dadosSeparados[4].trim());
+            Cliente cliente = new Cliente(dadosSeparados[0].trim(), cpf, tel, dadosSeparados[3].trim(), numCasa, dadosSeparados[5].trim(), dadosSeparados[6].trim());
             iClienteDAO.alterar(cliente);
         }
     }

@@ -10,6 +10,12 @@ public class Cliente {
     private String cidade;
     private String estado;
     
+    @Override
+    public String toString() {
+        return "Cliente [Nome = " + nome + ", CPF = " + cpf + ", Tel = " + tel + ", Endereco = " + endereco + ", NumeroCasa = "
+                + numCasa + ", Cidade = " + cidade + ", Estado = " + estado + "]";
+    }
+
     public Cliente(String nome, Long cpf, Long tel, String endereco, Integer numCasa, String cidade, String estado) {
         this.nome = nome;
         this.cpf = cpf;
@@ -49,10 +55,7 @@ public class Cliente {
             
         return true;
     }
-    @Override
-    public String toString() {
-        return "Cliente [Nome = " + nome + ", CPF = " + cpf + "]";
-    }
+    
 
     public String getNome() {
         return nome;
