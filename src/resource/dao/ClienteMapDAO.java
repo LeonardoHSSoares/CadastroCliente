@@ -40,6 +40,7 @@ public class ClienteMapDAO implements IClienteDAO{
         return this.map.get(cpf);
     }
 
+
     public Collection<Cliente> buscarTodos() {
         return this.map.values();
     }

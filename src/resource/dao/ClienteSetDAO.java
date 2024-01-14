@@ -1,41 +1,70 @@
 package resource.dao;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import resource.domain.Cliente;
 
 public class ClienteSetDAO implements IClienteDAO{
 
-    Cliente 
+    private Set<Cliente> set;
+
+    public ClienteSetDAO() {
+        this.set = new HashSet<>();
+    }
 
     @Override
     public Boolean cadastrar(Cliente cliente) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'cadastrar'");
+        return this.set.add(cliente);
     }
 
     @Override
     public void excluir(Long cpf) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'excluir'");
+        Cliente clienteEncontrado = null;
+        for (Cliente cliente : this.set) {
+            if (cliente.getCpf().equals(cpf)) {
+                clienteEncontrado = cliente;
+                break;
+            }
+        }
+        if (clienteEncontrado != null) {
+            this.set.remove(clienteEncontrado);
+        }
     }
 
     @Override
     public void alterar(Cliente cliente) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'alterar'");
+        if (this.set.contains(cliente)) {
+            for (Cliente clienteCadastrado : this.set) {
+                if (clienteCadastrado.equals(cliente)) {
+                    
+                    clienteCadastrado.setNome(cliente.getNome());
+                    clienteCadastrado.setTel(cliente.getTel());
+                    clienteCadastrado.setNumCasa(cliente.getNumCasa());
+                    clienteCadastrado.setEndereco(cliente.getEndereco());
+                    clienteCadastrado.setCidade(cliente.getCidade());
+                    clienteCadastrado.setEstado(cliente.getEstado());
+                    break;
+                }
+            }
+        }
     }
 
     @Override
     public Cliente consultar(Long cpf) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'consultar'");
+        for (Cliente clienteCadastrado : this.set) {
+            if (clienteCadastrado.getCpf().equals(cpf)) {
+                return clienteCadastrado;
+            }
+
+        }
+        return null;
     }
 
     @Override
     public Collection<Cliente> buscarTodos() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'buscarTodos'");
+        return this.set;
     }
     
 }
